@@ -1,0 +1,33 @@
+# Default values for services-api Helm chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: drewk/services-api
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+  targetPort: 3100
+
+# We usually recommend not to specify default resources and to leave this as a conscious
+# choice for the user. This makes it more likely that the charts will run successfully on
+# environments with few resources, such as Minikube. If you do want to specify resources,
+# uncomment the following lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+#
+# These can be modified on a per-environment basis. E.g, you may want to specify
+# more resources for the production environments than for test environments.
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
+resources: {}
+
+replicas: 1
+
+configuration:
+  nodeEnv: production
+  applicationPort: 3100

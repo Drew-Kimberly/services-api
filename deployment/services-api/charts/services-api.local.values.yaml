@@ -1,0 +1,10 @@
+# Declare variables to be passed into your Helm resource templates
+# These variables will override defaults when deploying locally.
+
+image:
+  repository: services-api
+  tag: latest
+  pullPolicy: never
+
+configuration:
+  nodeEnv: development
