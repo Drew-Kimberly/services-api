@@ -31,3 +31,9 @@ replicas: 1
 configuration:
   nodeEnv: production
   applicationPort: 3100
+
+database:
+  host: 'mysql'
+  user: ''
+  password: ''
+  name: 'services-db'

@@ -8,3 +8,7 @@ image:
 
 configuration:
   nodeEnv: development
+
+database:
+  user: 'root'
+  password: 'password'

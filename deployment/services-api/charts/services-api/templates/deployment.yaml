@@ -44,3 +44,5 @@ spec:
               value: {{ .Values.database.user | quote }}
             - name: SERVICES_DB_PASSWORD
               value: {{ .Values.database.password | quote }}
+            - name: SERVICES_DB_NAME
+              value: {{ .Values.database.name | quote }}
