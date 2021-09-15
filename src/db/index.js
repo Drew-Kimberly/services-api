@@ -19,14 +19,9 @@ db.init = async () => {
     }
 
     if (config.nodeEnv != 'production') {
-        try {
-            const connection = await mysql.createConnection({ host, port, user, password });
-            await connection.query(`CREATE DATABASE IF NOT EXISTS \`${databaseName}\`;`);
-            await sequelize.sync();
-        } catch (e) {
-            console.error('An error occurred while attempting to initialize the DB', e);
-            throw e;
-        }
+        const connection = await mysql.createConnection({ host, port, user, password });
+        await connection.query(`CREATE DATABASE IF NOT EXISTS \`${databaseName}\`;`);
+        await sequelize.sync({ force: true });
     }
 
     initialized = true;
