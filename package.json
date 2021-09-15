@@ -10,9 +10,14 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
   "dependencies": {
     "express": "^4.17.1"
   },
-  "scripts": {}
+  "scripts": {
+    "docker:dev": "cross-env DOCKER_BUILDKIT=1 docker build -t services-api --target dev .",
+    "docker:release": "cross-env DOCKER_BUILDKIT=1 docker build -t services-api --target release ."
+  }
 }
