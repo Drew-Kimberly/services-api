@@ -1,0 +1,9 @@
+{
+	"recommendations": [
+        "phgn.vscode-starlark",
+		"tchoupinax.tilt",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"ms-kubernetes-tools.vscode-kubernetes-tools"
+	]
+}

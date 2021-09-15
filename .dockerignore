@@ -1,6 +1,7 @@
 .git
 .gitignore
 .helm
+.vscode
 node_modules
 tilt_modules
 README.md
