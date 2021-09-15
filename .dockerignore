@@ -2,4 +2,5 @@
 .gitignore
 .helm
 node_modules
+tilt_modules
 README.md

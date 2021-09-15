@@ -1,3 +1,4 @@
 .helm
 node_modules
+tilt_modules
 *.log
