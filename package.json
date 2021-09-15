@@ -1,0 +1,18 @@
+{
+  "name": "@drewk/services-api",
+  "version": "0.1.0",
+  "description": "REST API for service definitions",
+  "main": "index.js",
+  "repository": "https://github.com/Drew-Kimberly/services-api",
+  "author": "Drew Kimberly",
+  "license": "UNLICENSED",
+  "private": false,
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "scripts": {}
+}
