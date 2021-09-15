@@ -34,6 +34,7 @@ configuration:
 
 database:
   host: 'mysql'
+  port: 3306
   user: ''
   password: ''
   name: 'services-db'

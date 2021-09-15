@@ -40,6 +40,8 @@ spec:
               value: {{ .Values.configuration.applicationPort | quote }}
             - name: SERVICES_DB_HOST
               value: {{ .Values.database.host | quote }}
+            - name: SERVICES_DB_PORT
+              value: {{ .Values.database.port | quote }}
             - name: SERVICES_DB_USER
               value: {{ .Values.database.user | quote }}
             - name: SERVICES_DB_PASSWORD

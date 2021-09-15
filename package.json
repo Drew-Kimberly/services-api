@@ -11,13 +11,17 @@
     "node": ">=14.0.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "sequelize-cli": "^6.2.0"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5"
   },
   "scripts": {
     "docker:dev": "cross-env DOCKER_BUILDKIT=1 docker build -t services-api --target dev .",
-    "docker:release": "cross-env DOCKER_BUILDKIT=1 docker build -t services-api --target release ."
+    "docker:release": "cross-env DOCKER_BUILDKIT=1 docker build -t services-api --target release .",
+    "sql-cli": "sequelize-cli"
   }
 }
