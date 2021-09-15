@@ -20,6 +20,7 @@
   },
   "scripts": {
     "docker:dev": "cross-env DOCKER_BUILDKIT=1 docker build -t services-api --target dev .",
-    "docker:release": "cross-env DOCKER_BUILDKIT=1 docker build -t services-api --target release ."
+    "docker:release": "cross-env DOCKER_BUILDKIT=1 docker build -t services-api --target release .",
+    "mysql": "kubectl run -it --rm --image=mysql:5.7 --restart=Never mysql-client -- mysql -h mysql -ppassword"
   }
 }
