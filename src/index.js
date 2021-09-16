@@ -1,24 +1,24 @@
-const express = require('express');
+const { app } = require('./app');
+const { registerGracefulShutdown } = require('./shutdown');
+const { dbShutdownHandler } = require('./db/dbShutdownHandler');
 const config = require('./config');
-const { dbReadinessProbe } = require('./db/dbReadinessProbe');
-const { registerServicesApiRoutes } = require('./api/routes');
-const { registerStatusRoutes } = require('./routes/status');
-const { isDevelopment } = require('./common');
-const { registerSeedDataRoute } = require('./routes/seed-data.route');
-const { registerPurgeDataRoute } = require('./routes/purge-data.route');
 
-const app = express();
-
-app.use(express.json());
-
-registerStatusRoutes(app, [], [dbReadinessProbe]);
-registerServicesApiRoutes(app);
-
-if (isDevelopment()) {
-    registerSeedDataRoute(app);
-    registerPurgeDataRoute(app);
+function createServerShutdownHandler(server) {
+    return () => {
+        return new Promise(resolve => {
+            server.close(err => {
+                if (err) {
+                    resolve({ isSuccessful: false, reason: `Failed to shutdown the app server! Reason: ${e}` });
+                } else {
+                    resolve({ isSuccessful: true });
+                }
+            });
+        });
+    };
 }
 
-app.listen(config.port, () => {
+const server = app.listen(config.port, () => {
     console.log(`Listening on port ${config.port}`);
 });
+
+registerGracefulShutdown([dbShutdownHandler, createServerShutdownHandler(server)]);
