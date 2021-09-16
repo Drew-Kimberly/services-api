@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "f8f363f3-fdf7-459a-b3f2-f41f7cff6529",
+		"name": "services-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/services",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Services Service\",\n    \"description\": \"A service for managing services\",\n    \"versions\": []\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/services",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/services?limit=10&sortBy=name&sortDir=asc&page=1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"services"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "service",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "sortBy",
+							"value": "name"
+						},
+						{
+							"key": "sortDir",
+							"value": "asc"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/services/:serviceId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/services/:serviceId",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"services",
+						":serviceId"
+					],
+					"variable": [
+						{
+							"key": "serviceId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/services/:serviceId",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Users\",\n    \"description\": \"strawberries\",\n    \"versions\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/services/:serviceId",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"services",
+						":serviceId"
+					],
+					"variable": [
+						{
+							"key": "serviceId",
+							"value": "25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/services/:serviceId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/services/:serviceId",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"services",
+						":serviceId"
+					],
+					"variable": [
+						{
+							"key": "serviceId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/services/:serviceId/versions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/services/:serviceId/versions?limit=3&sortBy=name&sortDir=desc&page=1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"services",
+						":serviceId",
+						"versions"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "sortBy",
+							"value": "name"
+						},
+						{
+							"key": "sortDir",
+							"value": "desc"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					],
+					"variable": [
+						{
+							"key": "serviceId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3100"
+		}
+	]
+}
