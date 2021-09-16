@@ -3,22 +3,23 @@ const { Version } = require('./Version');
 
 class Service extends Model {}
 
-const init = sequelize => Service.init(
-    {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false
+const init = sequelize =>
+    Service.init(
+        {
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            description: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: ''
+            }
         },
-        description: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: ''
+        {
+            sequelize: sequelize,
+            name: { singular: 'service', plural: 'services' }
         }
-    },
-    {
-        sequelize: sequelize,
-        modelName: 'Service'
-    }
-);
+    );
 
 module.exports = { init, Service };

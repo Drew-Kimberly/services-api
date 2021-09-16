@@ -1,6 +1,8 @@
 const versionsRouter = require('express').Router();
-const COLLECTION_PATH = '/versions';
+const { versionHandler } = require('../../api/handlers/versionHandler');
 
-versionsRouter.get(COLLECTION_PATH, (req, res) => res.json({ get: 'versions-collection' }));
+const COLLECTION_PATH = '/:serviceId/versions';
+
+versionsRouter.get(COLLECTION_PATH, versionHandler.findAll);
 
 module.exports = { versionsRouter };

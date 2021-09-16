@@ -24,7 +24,7 @@ db.init = async () => {
         const connection = await mysql.createConnection({ host, port, user, password });
         await connection.query(`CREATE DATABASE IF NOT EXISTS \`${databaseName}\`;`);
         initModels(sequelize);
-        await sequelize.sync({ force: true });
+        await sequelize.sync();
     } else {
         initModels(sequelize);
     }
