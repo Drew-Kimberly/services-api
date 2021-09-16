@@ -1,5 +1,7 @@
 const { db } = require('../../db');
 const { createResponse } = require('../dto/response');
+const { executeCollectionQuery } = require('../helpers/executeCollectionQuery');
+const { SEARCH_STRATEGY } = require('../helpers/getSearchQuery');
 
 const serviceHandler = {};
 
@@ -22,10 +24,19 @@ serviceHandler.findOne = async (req, res) => {
 };
 
 serviceHandler.findAll = async (req, res) => {
+    const collectionOptions = {
+        sortOptions: {
+            allowedFields: ['id', 'name', 'createdAt', 'updatedAt']
+        },
+        search: {
+            fields: ['name', 'description'],
+            strategy: SEARCH_STRATEGY.WILDCARD
+        }
+    };
+
     try {
-        const count = await db.Service.count();
-        const result = count > 0 ? await db.Service.findAll({ include: db.Version }) : [];
-        return res.json(createResponse(result, { count }));
+        const response = await executeCollectionQuery(req, db.Service, collectionOptions, { include: db.Version });
+        return res.json(response);
     } catch (e) {
         console.error(e);
         return res.status(500).json(createResponse(null, {}, e.message));

@@ -1,5 +1,7 @@
 const { db } = require('../../db');
 const { createResponse } = require('../dto/response');
+const { executeCollectionQuery } = require('../helpers/executeCollectionQuery');
+const { SEARCH_STRATEGY } = require('../helpers/getSearchQuery');
 
 const versionHandler = {};
 
@@ -16,8 +18,18 @@ versionHandler.findAll = async (req, res) => {
             return res.status(404).json(createResponse(null, {}, `The Service with id=${serviceId} does not exist`));
         }
 
-        const { rows, count } = await db.Version.findAndCountAll({ where: { serviceId } });
-        return res.json(createResponse(rows, { count }));
+        const collectionOptions = {
+            sortOptions: {
+                allowedFields: ['id', 'name', 'createdAt', 'updatedAt']
+            },
+            search: {
+                fields: ['name'],
+                strategy: SEARCH_STRATEGY.WILDCARD
+            }
+        };
+
+        const response = await executeCollectionQuery(req, db.Version, collectionOptions, { where: { serviceId } });
+        return res.json(response);
     } catch (e) {
         console.error(e);
         return res.status(500).json(createResponse(null, {}, e.message));

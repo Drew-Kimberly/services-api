@@ -1,6 +1,6 @@
 {
     "watch": ["src"],
-    "delay": "1000",
+    "delay": 1000,
     "ext": "js",
     "ignoreRoot": []
 }
