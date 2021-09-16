@@ -1,5 +1,5 @@
 const versionsRouter = require('express').Router();
-const { versionHandler } = require('../../api/handlers/versionHandler');
+const { versionHandler } = require('../handlers/versionHandler');
 
 const COLLECTION_PATH = '/:serviceId/versions';
 

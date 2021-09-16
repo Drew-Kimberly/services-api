@@ -1,6 +1,6 @@
 const servicesRouter = require('express').Router();
 const { versionsRouter } = require('./versions.route');
-const { serviceHandler } = require('../../api/handlers/serviceHandler');
+const { serviceHandler } = require('../handlers/serviceHandler');
 
 const COLLECTION_PATH = '/services';
 const ENTITY_PATH = `${COLLECTION_PATH}/:serviceId`;

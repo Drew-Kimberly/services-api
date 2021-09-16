@@ -1,7 +1,7 @@
 const express = require('express');
 const config = require('./config');
 const { dbReadinessProbe } = require('./db/dbReadinessProbe');
-const { registerServicesApiRoutes } = require('./routes/api');
+const { registerServicesApiRoutes } = require('./api/routes');
 const { registerStatusRoutes } = require('./routes/status');
 const { isDevelopment } = require('./common');
 const { registerSeedDataRoute } = require('./routes/seed-data.route');
