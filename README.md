@@ -9,6 +9,7 @@
 - [K8s for Docker Enabled](https://docs.docker.com/desktop/kubernetes/)
 - [Helm 3.x](https://helm.sh/docs/intro/install/)
 - [Tilt](https://docs.tilt.dev/install.html)
+- [Curl](https://curl.se/)
 
 ## Development
 

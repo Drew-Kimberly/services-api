@@ -33,3 +33,13 @@ docker_build(
 )
 
 k8s_resource('services-api', port_forwards=3100, resource_deps=['mysql'])
+
+
+# --- START: seed-db manual resource ---
+local_resource(
+    'seed-db',
+    cmd='curl -X POST http://localhost:3100/seed-data',
+    auto_init=False,
+    trigger_mode=TRIGGER_MODE_MANUAL,
+    resource_deps=['services-api']
+)
