@@ -1,6 +1,6 @@
 module.exports = {
     port: Number(process.env.SERVICES_API_PORT) || 3100,
-    nodeEnv: process.env.NODE_ENV || 'development',
+    nodeEnv: process.env.NODE_ENV || 'production',
     database: {
         host: process.env.SERVICES_DB_HOST,
         port: process.env.SERVICES_DB_PORT,

@@ -1,6 +1,6 @@
 const config = require('../config');
 
-const isDevelopment = () => config.nodeEnv != 'production';
+const isDevelopment = () => config.nodeEnv === 'development';
 
 const isObjectEmpty = obj => {
     if (!obj || typeof obj != 'object') {
