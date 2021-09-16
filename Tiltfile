@@ -43,3 +43,13 @@ local_resource(
     trigger_mode=TRIGGER_MODE_MANUAL,
     resource_deps=['services-api']
 )
+
+
+# --- START: purge-db manual resource ---
+local_resource(
+    'purge-db',
+    cmd='curl -X POST http://localhost:3100/purge-data',
+    auto_init=False,
+    trigger_mode=TRIGGER_MODE_MANUAL,
+    resource_deps=['services-api']
+)

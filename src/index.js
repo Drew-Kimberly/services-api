@@ -5,6 +5,7 @@ const { registerServicesApiRoutes } = require('./routes/api');
 const { registerStatusRoutes } = require('./routes/status');
 const { isDevelopment } = require('./common');
 const { registerSeedDataRoute } = require('./routes/seed-data.route');
+const { registerPurgeDataRoute } = require('./routes/purge-data.route');
 
 const app = express();
 
@@ -15,6 +16,7 @@ registerServicesApiRoutes(app);
 
 if (isDevelopment()) {
     registerSeedDataRoute(app);
+    registerPurgeDataRoute(app);
 }
 
 app.listen(config.port, () => {
