@@ -1,9 +1,8 @@
 const { DataTypes, Model } = require('sequelize');
-const { db } = require('..');
 
 class Version extends Model {}
 
-Version.init(
+const init = sequelize => Version.init(
     {
         name: {
             type: DataTypes.STRING,
@@ -11,9 +10,9 @@ Version.init(
         }
     },
     {
-        sequelize: db.sequelize,
+        sequelize: sequelize,
         modelName: 'Version'
     }
 );
 
-module.exports = { Version };
+module.exports = { init, Version };

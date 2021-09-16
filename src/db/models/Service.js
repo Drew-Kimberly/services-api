@@ -1,9 +1,9 @@
 const { DataTypes, Model } = require('sequelize');
-const { db } = require('../');
+const { Version } = require('./Version');
 
 class Service extends Model {}
 
-Service.init(
+const init = sequelize => Service.init(
     {
         name: {
             type: DataTypes.STRING,
@@ -13,17 +13,12 @@ Service.init(
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: ''
-        },
-        versions: {
-            type: DataTypes.ARRAY,
-            allowNull: false,
-            defaultValue: []
         }
     },
     {
-        sequelize: db.sequelize,
+        sequelize: sequelize,
         modelName: 'Service'
     }
 );
 
-module.exports = { Service };
+module.exports = { init, Service };

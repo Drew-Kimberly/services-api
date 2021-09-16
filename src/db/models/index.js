@@ -1,4 +1,14 @@
-const { Service } = require('./Service');
-const { Version } = require('./Version');
+const { init: initService, Service } = require('./Service');
+const { init: initVersion, Version } = require('./Version');
 
-module.exports = { Service, Version };
+const defineAssociations = () => {
+    Service.hasMany(Version, { foreignKey: 'serviceId' });
+};
+
+const initModels = sequelize => {
+    initService(sequelize);
+    initVersion(sequelize);
+    defineAssociations();
+};
+
+module.exports = { initModels, Service, Version };
