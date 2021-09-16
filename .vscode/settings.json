@@ -1,4 +1,5 @@
 {
+    "files.autoSaveDelay": 3000,
     "files.associations": {
         "Tiltfile": "starlark"
     }
