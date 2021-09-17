@@ -42,6 +42,12 @@ Seeds test data into the database.
 Truncates all tables in the database.
 *Note: requires `curl`*
 
+### Connecting to the DB
+As currently configured, you cannot directly connect to your local MySQL DB from your host machine. Instead, you have to connect from a Pod running on the K8s cluster. To make this easy, I added a Yarn script:
+```
+$ yarn mysql
+```
+
 ### Common Issues
 
 #### `"error": "Cannot read property 'hooks' of undefined"`
