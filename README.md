@@ -38,7 +38,7 @@ The following manually triggered resources are available via the Tilt Console:
 Seeds test data into the database.
 *Note: requires `curl`*
 
-### purge-db
+#### purge-db
 Truncates all tables in the database.
 *Note: requires `curl`*
 
