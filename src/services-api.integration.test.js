@@ -349,6 +349,21 @@ describe('POST /services', () => {
 
         throw new Error('Should not reach!');
     });
+
+    it('should return an error response when given an empty name field', async () => {
+        const service = { ...baseService, name: '' };
+        await expect(() => axios.post(`${baseUrl}/services`, service)).rejects.toThrow();
+    });
+
+    it('should return an error response when a name field is too long', async () => {
+        const service = { ...baseService, name: new Array(150).fill('a').join('') };
+        await expect(() => axios.post(`${baseUrl}/services`, service)).rejects.toThrow();
+    });
+
+    it('should return an error response when description field is too long', async () => {
+        const service = { ...baseService, name: new Array(600).fill('a').join('') };
+        await expect(() => axios.post(`${baseUrl}/services`, service)).rejects.toThrow();
+    });
 });
 
 describe('PUT /services/:serviceId', () => {
@@ -400,6 +415,24 @@ describe('PUT /services/:serviceId', () => {
         }
 
         throw new Error('Should not reach!');
+    });
+
+    it('should return an error response when given an empty name field', async () => {
+        const serviceId = 5;
+        const service = { ...baseService, name: '' };
+        await expect(() => axios.put(`${baseUrl}/services/${serviceId}`, service)).rejects.toThrow();
+    });
+
+    it('should return an error response when a name field is too long', async () => {
+        const serviceId = 5;
+        const service = { ...baseService, name: new Array(150).fill('a').join('') };
+        await expect(() => axios.put(`${baseUrl}/services/${serviceId}`, service)).rejects.toThrow();
+    });
+
+    it('should return an error response when description field is too long', async () => {
+        const serviceId = 5;
+        const service = { ...baseService, name: new Array(600).fill('a').join('') };
+        await expect(() => axios.put(`${baseUrl}/services/${serviceId}`, service)).rejects.toThrow();
     });
 });
 

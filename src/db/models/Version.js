@@ -7,7 +7,10 @@ const init = sequelize =>
         {
             name: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                validate: {
+                    len: { args: [1, 128], msg: 'name field must be between 1 and 128 chars' }
+                }
             }
         },
         {
