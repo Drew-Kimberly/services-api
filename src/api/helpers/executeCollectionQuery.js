@@ -24,22 +24,26 @@ async function executeCollectionQuery(req, dbModel, collectionOptions = {}, find
     const { pagination, sortOptions, search } = mergeCollectionOptions(collectionOptions);
 
     const [searchQuery, searchMeta] = getSearchQuery(req, search);
+    const [sortQuery, sortMeta] = getSortQuery(req, sortOptions);
 
     const whereClause =
         !isObjectEmpty(searchQuery) || !isObjectEmpty(findOptions.where || {})
             ? { where: merge(searchQuery, findOptions.where || {}) }
             : {};
 
-    const count = await dbModel.count(whereClause);
+    const orderClause =
+        Array.isArray(sortQuery.order) || Array.isArray(findOptions.order)
+            ? { order: [...(sortQuery.order || []), ...(findOptions.order || [])] }
+            : {};
 
+    const count = await dbModel.count(whereClause);
     const [paginationQuery, paginationMeta] = getPaginationQuery(req, pagination, count);
-    const [sortQuery, sortMeta] = getSortQuery(req, sortOptions);
 
     const results = await dbModel.findAll({
         ...findOptions,
         ...whereClause,
         ...paginationQuery,
-        ...sortQuery
+        ...orderClause
     });
 
     return createResponse(results, {

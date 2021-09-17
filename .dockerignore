@@ -5,3 +5,7 @@
 node_modules
 tilt_modules
 README.md
+**/*.test.js
+jest.config.*
+jest.environment.js
+**/__snapshots__

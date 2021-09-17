@@ -2,7 +2,7 @@ const SORT_DIRECTION = { ASC: 'ASC', DESC: 'DESC' };
 
 function getSortQuery(req, options) {
     const { sortField, sortDir } = resolveSortParams(req, options);
-    return [{ order: [[sortField, sortDir]] }, { sortField, sortDir }];
+    return [{ order: [[sortField, sortDir]] }, { sortField, sortDir: sortDir.toLowerCase() }];
 }
 
 const resolveSortParams = (req, options) => {

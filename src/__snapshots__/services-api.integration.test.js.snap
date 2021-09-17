@@ -1,0 +1,433 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /services should return all service definitions 1`] = `
+Object {
+  "data": Array [
+    {
+  "id": 15,
+  "name": "Reporting",
+  "description": "pears",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 30,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 15
+    },
+    {
+      "id": 29,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 15
+    }
+  ]
+},
+    {
+  "id": 14,
+  "name": "Users",
+  "description": "strawberries",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 28,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 14
+    },
+    {
+      "id": 27,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 14
+    }
+  ]
+},
+    {
+  "id": 13,
+  "name": "Service123",
+  "description": "oranges",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 26,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 13
+    },
+    {
+      "id": 25,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 13
+    }
+  ]
+},
+    {
+  "id": 12,
+  "name": "My Service",
+  "description": "bananas",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 24,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 12
+    },
+    {
+      "id": 23,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 12
+    }
+  ]
+},
+    {
+  "id": 11,
+  "name": "Reporting",
+  "description": "apples",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 22,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 11
+    },
+    {
+      "id": 21,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 11
+    }
+  ]
+},
+    {
+  "id": 10,
+  "name": "FooBarBaz",
+  "description": "8e18444e204954e0fe9ef049278269a1",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 20,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 10
+    },
+    {
+      "id": 19,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 10
+    }
+  ]
+},
+    {
+  "id": 9,
+  "name": "BarBaz",
+  "description": "",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 18,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 9
+    },
+    {
+      "id": 17,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 9
+    }
+  ]
+},
+    {
+  "id": 8,
+  "name": "FooBar",
+  "description": "c302fb83c9512c6e10d0c40608f91eee",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 16,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 8
+    },
+    {
+      "id": 15,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 8
+    }
+  ]
+},
+    {
+  "id": 7,
+  "name": "Priority Services",
+  "description": "3ef79689dff252ba68d6f15df4056de0",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 14,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 7
+    },
+    {
+      "id": 13,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 7
+    }
+  ]
+},
+    {
+  "id": 6,
+  "name": "Notifications",
+  "description": "8409ae41c8693b0a60c819a8cd9a5089",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 12,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 6
+    },
+    {
+      "id": 11,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 6
+    }
+  ]
+},
+    {
+  "id": 5,
+  "name": "FX Rates International",
+  "description": "",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 10,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 5
+    },
+    {
+      "id": 9,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 5
+    }
+  ]
+},
+    {
+  "id": 4,
+  "name": "FX Rates International",
+  "description": "6bb2e62a4012839467747cee994da475",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 8,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 4
+    },
+    {
+      "id": 7,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 4
+    }
+  ]
+},
+    {
+  "id": 3,
+  "name": "Contact Us",
+  "description": "f3b930ad7edf872bea01cb15240fe785",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 6,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 3
+    },
+    {
+      "id": 5,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 3
+    }
+  ]
+},
+    {
+  "id": 2,
+  "name": "Collect Monday",
+  "description": "afd73373999a6b19c5a96db0bcec82aa",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 4,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 2
+    },
+    {
+      "id": 3,
+      "name": "v3",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 2
+    }
+  ]
+},
+    {
+  "id": 1,
+  "name": "Locate Us",
+  "description": "93cc8046e4d1db11aa909d3f14573487",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 2,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 1
+    },
+    {
+      "id": 1,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 1
+    }
+  ]
+},
+  ],
+  "meta": Object {
+    "page": 1,
+    "pageCount": 1,
+    "returnedCount": 15,
+    "sortDir": "desc",
+    "sortField": "id",
+    "totalCount": 15,
+  },
+}
+`;
+
+exports[`GET /services/:serviceId should return the request service definition 1`] = `
+Object {
+  "data": {
+  "id": 1,
+  "name": "Locate Us",
+  "description": "93cc8046e4d1db11aa909d3f14573487",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "versions": [
+    {
+      "id": 2,
+      "name": "v2",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 1
+    },
+    {
+      "id": 1,
+      "name": "v1",
+      "createdAt": "mockCreatedAtTimestamp",
+      "updatedAt": "mockUpdatedAtTimestamp",
+      "serviceId": 1
+    }
+  ]
+},
+  "meta": Object {},
+}
+`;
+
+exports[`GET /services/:serviceId/versions should return all versions for a given service 1`] = `
+Object {
+  "data": Array [
+    {
+  "id": 2,
+  "name": "v2",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "serviceId": 1
+},
+    {
+  "id": 1,
+  "name": "v1",
+  "createdAt": "mockCreatedAtTimestamp",
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "serviceId": 1
+},
+  ],
+  "meta": Object {
+    "page": 1,
+    "pageCount": 1,
+    "returnedCount": 2,
+    "sortDir": "desc",
+    "sortField": "id",
+    "totalCount": 2,
+  },
+}
+`;
+
+exports[`POST /services should create a new service 1`] = `
+Object {
+  "data": {
+  "id": 16,
+  "name": "Integration Test Service POST",
+  "description": "Service created by a POST request",
+  "versions": [],
+  "updatedAt": "mockUpdatedAtTimestamp",
+  "createdAt": "mockCreatedAtTimestamp"
+},
+  "meta": Object {},
+}
+`;

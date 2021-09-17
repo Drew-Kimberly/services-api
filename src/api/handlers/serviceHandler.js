@@ -9,11 +9,15 @@ serviceHandler.findOne = async (req, res) => {
     const serviceId = req.params.serviceId;
 
     if (!serviceId || !Number(serviceId)) {
-        return res.status(400).json(createResponse(null, {}, 'Invalid Service ID provided'));
+        return res.status(404).json(createResponse(null, {}, `No Service found with id=${serviceId}`));
     }
 
     try {
-        const result = await db.Service.findByPk(serviceId, { include: db.Version });
+        const result = await db.Service.findByPk(serviceId, {
+            include: db.Version,
+            order: [[db.Version, 'id', 'desc']]
+        });
+
         return !!result
             ? res.json(createResponse(result))
             : res.status(404).json(createResponse(null, {}, `No Service found with id=${serviceId}`));
@@ -35,7 +39,10 @@ serviceHandler.findAll = async (req, res) => {
     };
 
     try {
-        const response = await executeCollectionQuery(req, db.Service, collectionOptions, { include: db.Version });
+        const response = await executeCollectionQuery(req, db.Service, collectionOptions, {
+            include: db.Version,
+            order: [[db.Version, 'id', 'desc']]
+        });
         return res.json(response);
     } catch (e) {
         console.error(e);
@@ -64,7 +71,7 @@ serviceHandler.update = async (req, res) => {
     const serviceUpdates = req.body;
 
     if (!serviceId || !Number(serviceId)) {
-        return res.status(400).json(createResponse(null, {}, 'Invalid Service ID provided'));
+        return res.status(404).json(createResponse(null, {}, `No Service found with id=${serviceId}`));
     }
 
     try {
@@ -86,7 +93,7 @@ serviceHandler.delete = async (req, res) => {
     const serviceId = req.params.serviceId;
 
     if (!serviceId || !Number(serviceId)) {
-        return res.status(400).json(createResponse(null, {}, 'Invalid Service ID provided'));
+        return res.status(404).json(createResponse(null, {}, `No Service found with id=${serviceId}`));
     }
 
     try {
