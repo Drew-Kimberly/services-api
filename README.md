@@ -64,7 +64,7 @@ Automated integration tests are available to run via:
 $ yarn test:integration
 ```
 
-***The integration tests are not idempotent/robust and dependent on the app running locally on port 3100 and a freshly seeded DB.***
+***The integration tests are dependent on the app running locally on port 3100 in a separate process. The tests will truncate all DB data and seed the DB with fresh data prior to running.***
 
 ## Design Considerations
 
@@ -95,7 +95,7 @@ $ yarn test:integration
 - When using Typescript on the server, I find it advantageous to extract validation logic for a given entity into a NPM lib that can be consumed on both the client and server for a consistent end-user experience.
 
 ### Testing
-- I went with utility here, trying to maximize the ratio of "value gained" to implementation time. This led me to write an integration test suite that relies on the app being locally available at port 3100 via a separate process and the database being seeded with test data.
+- I went with utility here, trying to maximize the ratio of "value gained" to implementation time. This led me to write an integration test suite that relies on the app being locally available at port 3100 via a separate process.
 - The test suite is far from comprehensive. For example, I did not spend a ton of time covering every edge case or error condition. However, I am happy with the level of confidence the suite gives me regarding the functionality of the API.
 - In an ideal world, integration tests would be self-contained and idempotent. Furthermore, I would layer in other types of tests like Unit tests for more granular coverage in certain areas (graceful shutdown and k8s probes are areas that are uncovered and immediately come to mind).
 

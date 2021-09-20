@@ -1,16 +1,22 @@
 const axios = require('axios').default;
 
-const baseUrl = 'http://localhost:3100/api';
+const baseUrl = 'http://localhost:3100';
+const baseApiUrl = `${baseUrl}/api`;
+
+beforeAll(async () => {
+    await axios.post(`${baseUrl}/purge-data`);
+    await axios.post(`${baseUrl}/seed-data`);
+});
 
 describe('GET /services', () => {
     it('should return all service definitions', async () => {
-        const response = await axios.get(`${baseUrl}/services`);
+        const response = await axios.get(`${baseApiUrl}/services`);
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
     });
 
     it('should sort associated version arrays by version ID desc', async () => {
-        const response = await axios.get(`${baseUrl}/services`);
+        const response = await axios.get(`${baseApiUrl}/services`);
         expect(response.status).toEqual(200);
         const services = response.data.data;
         services.forEach(svc => {
@@ -25,7 +31,7 @@ describe('GET /services', () => {
     describe('search', () => {
         it('should support wildcard search by name', async () => {
             const searchTerm = 'baz';
-            const response = await axios.get(`${baseUrl}/services?search=${searchTerm}`);
+            const response = await axios.get(`${baseApiUrl}/services?search=${searchTerm}`);
 
             expect(response.status).toEqual(200);
             const services = response.data.data;
@@ -37,7 +43,7 @@ describe('GET /services', () => {
 
         it('should support wildcard search by description', async () => {
             const searchTerm = 'nana';
-            const response = await axios.get(`${baseUrl}/services?search=${searchTerm}`);
+            const response = await axios.get(`${baseApiUrl}/services?search=${searchTerm}`);
             expect(response.status).toEqual(200);
             const services = response.data.data;
             expect(services.length).toEqual(1);
@@ -46,7 +52,7 @@ describe('GET /services', () => {
 
         it('should return an empty result set when the search does not match', async () => {
             const searchTerm = 'does-not-exist';
-            const response = await axios.get(`${baseUrl}/services?search=${searchTerm}`);
+            const response = await axios.get(`${baseApiUrl}/services?search=${searchTerm}`);
             expect(response.status).toEqual(200);
             const services = response.data.data;
             expect(services.length).toEqual(0);
@@ -55,7 +61,7 @@ describe('GET /services', () => {
 
     describe('sort', () => {
         it('should default to sort by service ID desc', async () => {
-            const response = await axios.get(`${baseUrl}/services`);
+            const response = await axios.get(`${baseApiUrl}/services`);
             expect(response.status).toEqual(200);
 
             const services = response.data.data;
@@ -67,7 +73,7 @@ describe('GET /services', () => {
         });
 
         it('should change direction based on the sortDir query param', async () => {
-            const response = await axios.get(`${baseUrl}/services?sortDir=asc`);
+            const response = await axios.get(`${baseApiUrl}/services?sortDir=asc`);
             expect(response.status).toEqual(200);
 
             const services = response.data.data;
@@ -79,7 +85,7 @@ describe('GET /services', () => {
         });
 
         it('should change direction based on the sortDir query param', async () => {
-            const response = await axios.get(`${baseUrl}/services?sortDir=asc`);
+            const response = await axios.get(`${baseApiUrl}/services?sortDir=asc`);
             expect(response.status).toEqual(200);
 
             const services = response.data.data;
@@ -91,7 +97,7 @@ describe('GET /services', () => {
         });
 
         it('should change the field sorted by based on the sortBy query param', async () => {
-            const response = await axios.get(`${baseUrl}/services?sortDir=asc&sortBy=name`);
+            const response = await axios.get(`${baseApiUrl}/services?sortDir=asc&sortBy=name`);
             expect(response.status).toEqual(200);
 
             const services = response.data.data;
@@ -103,7 +109,7 @@ describe('GET /services', () => {
         });
 
         it('should not sort by unsupported fields or directions', async () => {
-            const response = await axios.get(`${baseUrl}/services?sortDir=bad&sortBy=versions`);
+            const response = await axios.get(`${baseApiUrl}/services?sortDir=bad&sortBy=versions`);
             expect(response.status).toEqual(200);
 
             const services = response.data.data;
@@ -117,7 +123,7 @@ describe('GET /services', () => {
         it('should include sort metadata in the response', async () => {
             const sortField = 'updatedAt';
             const sortDir = 'desc';
-            const response = await axios.get(`${baseUrl}/services?sortDir=${sortDir}&sortBy=${sortField}`);
+            const response = await axios.get(`${baseApiUrl}/services?sortDir=${sortDir}&sortBy=${sortField}`);
             expect(response.status).toEqual(200);
             expect(response.data.meta).toEqual(
                 expect.objectContaining({
@@ -131,16 +137,16 @@ describe('GET /services', () => {
     describe('pagination', () => {
         it('should support limiting the returned results', async () => {
             const limit = 5;
-            const response = await axios.get(`${baseUrl}/services?limit=${limit}`);
+            const response = await axios.get(`${baseApiUrl}/services?limit=${limit}`);
             expect(response.status).toEqual(200);
             expect(response.data.data.length).toEqual(limit);
         });
 
         it('should support paging through limited results', async () => {
             const limit = 5;
-            const page1Response = await axios.get(`${baseUrl}/services?limit=${limit}&page=1`);
+            const page1Response = await axios.get(`${baseApiUrl}/services?limit=${limit}&page=1`);
             expect(page1Response.status).toEqual(200);
-            const page2Response = await axios.get(`${baseUrl}/services?limit=${limit}&page=2`);
+            const page2Response = await axios.get(`${baseApiUrl}/services?limit=${limit}&page=2`);
             expect(page2Response.status).toEqual(200);
 
             expect(page1Response.data.data.length).toEqual(page2Response.data.data.length);
@@ -153,11 +159,11 @@ describe('GET /services', () => {
             const search = 'ba';
 
             const page1Response = await axios.get(
-                `${baseUrl}/services?limit=${limit}&page=1&sortBy=${sortField}&search=${search}`
+                `${baseApiUrl}/services?limit=${limit}&page=1&sortBy=${sortField}&search=${search}`
             );
             expect(page1Response.status).toEqual(200);
             const page2Response = await axios.get(
-                `${baseUrl}/services?limit=${limit}&page=2&sortBy=${sortField}&search=${search}`
+                `${baseApiUrl}/services?limit=${limit}&page=2&sortBy=${sortField}&search=${search}`
             );
             expect(page2Response.status).toEqual(200);
 
@@ -181,7 +187,7 @@ describe('GET /services', () => {
             const lastPage = Math.ceil(totalRecords / limit);
             const expectedLastPageCount = totalRecords % limit;
 
-            const response = await axios.get(`${baseUrl}/services?limit=${limit}&page=${lastPage}`);
+            const response = await axios.get(`${baseApiUrl}/services?limit=${limit}&page=${lastPage}`);
             expect(response.status).toEqual(200);
             expect(response.data.data.length).toEqual(expectedLastPageCount);
         });
@@ -190,7 +196,7 @@ describe('GET /services', () => {
             const totalRecords = 15; // Heavy assumption :'(
             const limit = 5;
             const currentPage = 2;
-            const response = await axios.get(`${baseUrl}/services?limit=${limit}&page=${currentPage}`);
+            const response = await axios.get(`${baseApiUrl}/services?limit=${limit}&page=${currentPage}`);
             expect(response.status).toEqual(200);
             expect(response.data.meta).toEqual(
                 expect.objectContaining({
@@ -206,7 +212,7 @@ describe('GET /services', () => {
             const searchTerm = 'bar';
             const limit = 2;
             const page = 2;
-            const response = await axios.get(`${baseUrl}/services?limit=${limit}&page=${page}&search=${searchTerm}`);
+            const response = await axios.get(`${baseApiUrl}/services?limit=${limit}&page=${page}&search=${searchTerm}`);
             expect(response.status).toEqual(200);
             expect(response.data.meta).toEqual(
                 expect.objectContaining({
@@ -223,14 +229,14 @@ describe('GET /services', () => {
 describe('GET /services/:serviceId', () => {
     it('should return the request service definition', async () => {
         const serviceId = 1;
-        const response = await axios.get(`${baseUrl}/services/${serviceId}`);
+        const response = await axios.get(`${baseApiUrl}/services/${serviceId}`);
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
     });
 
     it('should sort the associated version array by version ID desc', async () => {
         const serviceId = 5;
-        const response = await axios.get(`${baseUrl}/services/${serviceId}`);
+        const response = await axios.get(`${baseApiUrl}/services/${serviceId}`);
         expect(response.status).toEqual(200);
 
         const service = response.data.data;
@@ -244,7 +250,7 @@ describe('GET /services/:serviceId', () => {
     it('should return a 404 given a valid but unknown service ID', async () => {
         const serviceId = 999;
         try {
-            await axios.get(`${baseUrl}/services/${serviceId}`);
+            await axios.get(`${baseApiUrl}/services/${serviceId}`);
         } catch (e) {
             expect(e.response.status).toEqual(404);
             return;
@@ -256,7 +262,7 @@ describe('GET /services/:serviceId', () => {
     it('should return a 404 given an invalid service ID', async () => {
         const serviceId = 'should-not-be-valid';
         try {
-            await axios.get(`${baseUrl}/services/${serviceId}`);
+            await axios.get(`${baseApiUrl}/services/${serviceId}`);
         } catch (e) {
             expect(e.response.status).toEqual(404);
             return;
@@ -269,7 +275,7 @@ describe('GET /services/:serviceId', () => {
 describe('GET /services/:serviceId/versions', () => {
     it('should return all versions for a given service', async () => {
         const serviceId = 1;
-        const response = await axios.get(`${baseUrl}/services/${serviceId}/versions`);
+        const response = await axios.get(`${baseApiUrl}/services/${serviceId}/versions`);
         expect(response.status).toEqual(200);
         expect(response.data).toMatchSnapshot();
     });
@@ -277,7 +283,7 @@ describe('GET /services/:serviceId/versions', () => {
     it('should return a 404 given an unknown Service ID', async () => {
         const serviceId = 321;
         try {
-            await axios.get(`${baseUrl}/services/${serviceId}/versions`);
+            await axios.get(`${baseApiUrl}/services/${serviceId}/versions`);
         } catch (e) {
             expect(e.response.status).toEqual(404);
             return;
@@ -288,7 +294,7 @@ describe('GET /services/:serviceId/versions', () => {
 
     it('should sort by Version ID DESC by default', async () => {
         const serviceId = 1;
-        const response = await axios.get(`${baseUrl}/services/${serviceId}/versions`);
+        const response = await axios.get(`${baseApiUrl}/services/${serviceId}/versions`);
         expect(response.status).toEqual(200);
 
         const versions = response.data.data;
@@ -304,7 +310,7 @@ describe('GET /services/:serviceId/versions', () => {
         const limit = 1;
         const sortField = 'name';
         const response = await axios.get(
-            `${baseUrl}/services/${serviceId}/versions?limit=${limit}&sortBy=${sortField}`
+            `${baseApiUrl}/services/${serviceId}/versions?limit=${limit}&sortBy=${sortField}`
         );
         expect(response.status).toEqual(200);
         expect(response.data.meta).toEqual(
@@ -328,11 +334,11 @@ describe('POST /services', () => {
     };
 
     it('should create a new service', async () => {
-        const response = await axios.post(`${baseUrl}/services`, baseService);
+        const response = await axios.post(`${baseApiUrl}/services`, baseService);
         expect(response.status).toEqual(201);
         expect(response.data).toMatchSnapshot();
 
-        const fetchResponse = await axios.get(`${baseUrl}/services/${response.data.data.id}`);
+        const fetchResponse = await axios.get(`${baseApiUrl}/services/${response.data.data.id}`);
         expect(fetchResponse.status).toEqual(200);
         expect(response.data.data).toEqual(expect.objectContaining(baseService));
     });
@@ -341,7 +347,7 @@ describe('POST /services', () => {
         const service = { ...baseService, id: 25 };
 
         try {
-            await axios.post(`${baseUrl}/services`, service);
+            await axios.post(`${baseApiUrl}/services`, service);
         } catch (e) {
             expect(e.response.status).toEqual(400);
             return;
@@ -352,17 +358,17 @@ describe('POST /services', () => {
 
     it('should return an error response when given an empty name field', async () => {
         const service = { ...baseService, name: '' };
-        await expect(() => axios.post(`${baseUrl}/services`, service)).rejects.toThrow();
+        await expect(() => axios.post(`${baseApiUrl}/services`, service)).rejects.toThrow();
     });
 
     it('should return an error response when a name field is too long', async () => {
         const service = { ...baseService, name: new Array(150).fill('a').join('') };
-        await expect(() => axios.post(`${baseUrl}/services`, service)).rejects.toThrow();
+        await expect(() => axios.post(`${baseApiUrl}/services`, service)).rejects.toThrow();
     });
 
     it('should return an error response when description field is too long', async () => {
         const service = { ...baseService, name: new Array(600).fill('a').join('') };
-        await expect(() => axios.post(`${baseUrl}/services`, service)).rejects.toThrow();
+        await expect(() => axios.post(`${baseApiUrl}/services`, service)).rejects.toThrow();
     });
 });
 
@@ -375,10 +381,10 @@ describe('PUT /services/:serviceId', () => {
 
     it('should create a new service if that service does not exist', async () => {
         const serviceId = 17;
-        const response = await axios.put(`${baseUrl}/services/${serviceId}`, baseService);
+        const response = await axios.put(`${baseApiUrl}/services/${serviceId}`, baseService);
         expect(response.status).toEqual(201);
 
-        const fetchResponse = await axios.get(`${baseUrl}/services/${serviceId}`);
+        const fetchResponse = await axios.get(`${baseApiUrl}/services/${serviceId}`);
         expect(fetchResponse.status).toEqual(200);
         expect(fetchResponse.data.data).toEqual(expect.objectContaining(baseService));
     });
@@ -388,13 +394,13 @@ describe('PUT /services/:serviceId', () => {
         const updatedName = baseService.name + ' updated';
         const updatedService = { ...baseService, name: updatedName };
 
-        const response1 = await axios.put(`${baseUrl}/services/${serviceId}`, updatedService);
+        const response1 = await axios.put(`${baseApiUrl}/services/${serviceId}`, updatedService);
         expect(response1.status).toEqual(200);
 
-        const response2 = await axios.put(`${baseUrl}/services/${serviceId}`, updatedService);
+        const response2 = await axios.put(`${baseApiUrl}/services/${serviceId}`, updatedService);
         expect(response2.status).toEqual(200);
 
-        const fetchResponse = await axios.get(`${baseUrl}/services/${serviceId}`);
+        const fetchResponse = await axios.get(`${baseApiUrl}/services/${serviceId}`);
         expect(fetchResponse.status).toEqual(200);
         expect(fetchResponse.data.data).toEqual(expect.objectContaining(updatedService));
     });
@@ -408,7 +414,7 @@ describe('PUT /services/:serviceId', () => {
         };
 
         try {
-            await axios.put(`${baseUrl}/services/${serviceId}`, service);
+            await axios.put(`${baseApiUrl}/services/${serviceId}`, service);
         } catch (e) {
             expect(e.response.status).toEqual(404);
             return;
@@ -420,30 +426,30 @@ describe('PUT /services/:serviceId', () => {
     it('should return an error response when given an empty name field', async () => {
         const serviceId = 5;
         const service = { ...baseService, name: '' };
-        await expect(() => axios.put(`${baseUrl}/services/${serviceId}`, service)).rejects.toThrow();
+        await expect(() => axios.put(`${baseApiUrl}/services/${serviceId}`, service)).rejects.toThrow();
     });
 
     it('should return an error response when a name field is too long', async () => {
         const serviceId = 5;
         const service = { ...baseService, name: new Array(150).fill('a').join('') };
-        await expect(() => axios.put(`${baseUrl}/services/${serviceId}`, service)).rejects.toThrow();
+        await expect(() => axios.put(`${baseApiUrl}/services/${serviceId}`, service)).rejects.toThrow();
     });
 
     it('should return an error response when description field is too long', async () => {
         const serviceId = 5;
         const service = { ...baseService, name: new Array(600).fill('a').join('') };
-        await expect(() => axios.put(`${baseUrl}/services/${serviceId}`, service)).rejects.toThrow();
+        await expect(() => axios.put(`${baseApiUrl}/services/${serviceId}`, service)).rejects.toThrow();
     });
 });
 
 describe('DELETE /services/:serviceId', () => {
     it('should delete the specified service', async () => {
         const serviceId = 16;
-        const response = await axios.delete(`${baseUrl}/services/${serviceId}`);
+        const response = await axios.delete(`${baseApiUrl}/services/${serviceId}`);
         expect(response.status).toEqual(204);
 
         try {
-            await axios.get(`${baseUrl}/services/${serviceId}`);
+            await axios.get(`${baseApiUrl}/services/${serviceId}`);
         } catch (e) {
             expect(e.response.status).toEqual(404);
             return;
@@ -454,17 +460,17 @@ describe('DELETE /services/:serviceId', () => {
 
     it('should be idempotent', async () => {
         const serviceId = 17;
-        const response1 = await axios.delete(`${baseUrl}/services/${serviceId}`);
+        const response1 = await axios.delete(`${baseApiUrl}/services/${serviceId}`);
         expect(response1.status).toEqual(204);
 
-        const response2 = await axios.delete(`${baseUrl}/services/${serviceId}`);
+        const response2 = await axios.delete(`${baseApiUrl}/services/${serviceId}`);
         expect(response2.status).toEqual(204);
     });
 
     it('should return a 404 given an invalid service ID', async () => {
         const serviceId = 'should-not-be-valid';
         try {
-            await axios.delete(`${baseUrl}/services/${serviceId}`);
+            await axios.delete(`${baseApiUrl}/services/${serviceId}`);
         } catch (e) {
             expect(e.response.status).toEqual(404);
             return;
